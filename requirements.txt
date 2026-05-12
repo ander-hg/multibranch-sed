@@ -1,0 +1,11 @@
+tensorflow>=2.13
+librosa
+numpy
+pandas
+scikit-learn
+scipy
+matplotlib
+seaborn==0.13.2
+iterative-stratification
+sed_eval
+tqdm

@@ -1,0 +1,122 @@
+{
+  "all_w256_norm_es_fold0": {
+    "mAUC": 0.9035835312779154,
+    "mAP": 0.13663240765976484,
+    "epochs": 37,
+    "time": 430.18465518951416
+  },
+  "all_w256_norm_es_fold1": {
+    "mAUC": 0.8986458016384777,
+    "mAP": 0.12635967927463326,
+    "epochs": 32,
+    "time": 369.48274755477905
+  },
+  "all_w256_norm_es_fold2": {
+    "mAUC": 0.8949280846575314,
+    "mAP": 0.12176445166036648,
+    "epochs": 32,
+    "time": 298.782751083374
+  },
+  "all_w256_norm_es_fold3": {
+    "mAUC": 0.8934527602075004,
+    "mAP": 0.11923860456438835,
+    "epochs": 26,
+    "time": 288.59602093696594
+  },
+  "all_w256_norm_es_fold4": {
+    "mAUC": 0.8964734674324975,
+    "mAP": 0.130172044844267,
+    "epochs": 33,
+    "time": 401.69537472724915
+  },
+  "all_w128_norm_es_fold0": {
+    "mAUC": 0.9056056801346074,
+    "mAP": 0.13442664847717747,
+    "epochs": 37,
+    "time": 734.295135974884
+  },
+  "all_w128_norm_es_fold1": {
+    "mAUC": 0.9041957574980661,
+    "mAP": 0.14063107391594032,
+    "epochs": 39,
+    "time": 755.5105798244476
+  },
+  "all_w128_norm_es_fold2": {
+    "mAUC": 0.8992310725239887,
+    "mAP": 0.13284034136124634,
+    "epochs": 40,
+    "time": 877.7433545589447
+  },
+  "all_w128_norm_es_fold3": {
+    "mAUC": 0.8996713118590441,
+    "mAP": 0.1304009865235007,
+    "epochs": 35,
+    "time": 670.7651114463806
+  },
+  "all_w128_norm_es_fold4": {
+    "mAUC": 0.8991429942717264,
+    "mAP": 0.13814654390172634,
+    "epochs": 33,
+    "time": 772.1205904483795
+  },
+  "log_mel+mfcc+chroma_w128_norm_es_fold0": {
+    "mAUC": 0.9069009164762427,
+    "mAP": 0.13645653545325248,
+    "epochs": 44,
+    "time": 521.9531736373901
+  },
+  "log_mel+mfcc+chroma_w128_norm_es_fold1": {
+    "mAUC": 0.9034537790179508,
+    "mAP": 0.13679576096133286,
+    "epochs": 45,
+    "time": 532.8831677436829
+  },
+  "log_mel+mfcc+chroma_w128_norm_es_fold2": {
+    "mAUC": 0.899314320489388,
+    "mAP": 0.13235747608818568,
+    "epochs": 40,
+    "time": 475.56548738479614
+  },
+  "log_mel+mfcc+chroma_w128_norm_es_fold3": {
+    "mAUC": 0.8985719984083071,
+    "mAP": 0.1289840214552925,
+    "epochs": 37,
+    "time": 440.04529190063477
+  },
+  "log_mel+mfcc+chroma_w128_norm_es_fold4": {
+    "mAUC": 0.8980228157542608,
+    "mAP": 0.12921582243598312,
+    "epochs": 33,
+    "time": 398.86939907073975
+  },
+  "log_mel+mfcc+chroma+statistical_w128_norm_es_fold0": {
+    "mAUC": 0.9032821548144415,
+    "mAP": 0.14108817004095175,
+    "epochs": 39,
+    "time": 559.1478822231293
+  },
+  "log_mel+mfcc+chroma+statistical_w128_norm_es_fold1": {
+    "mAUC": 0.9025711728428869,
+    "mAP": 0.13372675765953512,
+    "epochs": 36,
+    "time": 516.5848753452301
+  },
+  "log_mel+mfcc+chroma+statistical_w128_norm_es_fold2": {
+    "mAUC": 0.9006408265114766,
+    "mAP": 0.13195294268066296,
+    "epochs": 43,
+    "time": 623.2755789756775
+  },
+  "log_mel+mfcc+chroma+statistical_w128_norm_es_fold3": {
+    "mAUC": 0.90063158742701,
+    "mAP": 0.1353922925188102,
+    "epochs": 37,
+    "time": 476.60180163383484
+  },
+  "log_mel+mfcc+chroma+statistical_w128_norm_es_fold4": {
+    "mAUC": 0.9002232871126593,
+    "mAP": 0.13730051883223038,
+    "epochs": 32,
+    "time": 413.77625274658203
+  }
+}
