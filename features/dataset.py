@@ -2,9 +2,31 @@ import os
 import pickle
 
 import numpy as np
+import pandas as pd
 from tqdm import tqdm
 
 from features.extractors import extract_features
+
+
+def load_segments(annot_csv, labels_csv):
+    """Parse balanced_train_segments.csv into a DataFrame with mapped label names."""
+    def custom_split(line):
+        parts = line.split(",", maxsplit=3)
+        return parts if len(parts) == 4 else None
+
+    class_labels_df = pd.read_csv(labels_csv)
+    label_map = dict(zip(class_labels_df["mid"], class_labels_df["display_name"]))
+
+    with open(annot_csv) as f:
+        lines = f.readlines()
+    data = [custom_split(l.strip()) for l in lines[3:] if custom_split(l.strip())]
+    df = pd.DataFrame(data, columns=["YTID", "start_seconds", "end_seconds", "positive_labels"])
+    df["positive_labels"] = df["positive_labels"].str.replace('^\\s*"|"$', "", regex=True)
+    df["positive_labels"] = df["positive_labels"].apply(lambda x: x.strip('"').split(","))
+    df["mapped_labels"] = df["positive_labels"].apply(
+        lambda mids: [label_map[mid] for mid in mids if mid in label_map]
+    )
+    return df
 
 
 def prepare_dataset(segments_df, audio_base_path, save_path,

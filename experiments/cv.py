@@ -42,7 +42,6 @@ CV_CONFIGS = {
         'results_path': 'results/mamba_multibranch_cv5_results.json',
         'configs': [
             ('all_w256_norm_es', ALL_FEATURES, 256, True),
-            ('all_w128_norm_es', ALL_FEATURES, 128, True),
         ],
     },
 }
@@ -101,7 +100,7 @@ def run_cv(arch, all_data, y_fixed, n_folds=5):
             model = build_fn([X.shape[1:] for X in X_train_list], y_fixed.shape[1])
             cb    = EarlyStopping(monitor='val_loss', patience=ES_PATIENCE, restore_best_weights=True)
             history = model.fit(X_train_list, y_train, epochs=MAX_EPOCHS, batch_size=BATCH_SIZE,
-                                validation_split=VAL_SPLIT, callbacks=[cb], verbose=0)
+                                validation_split=VAL_SPLIT, callbacks=[cb], verbose=1)
             actual_epochs = len(history.history['loss'])
 
             metrics           = evaluate_model(model, X_test_list, y_test)
@@ -118,15 +117,39 @@ def run_cv(arch, all_data, y_fixed, n_folds=5):
 if __name__ == '__main__':
     import argparse
     from features.dataset import load_all_data
-    from config import WINDOW_SIZES, FEATURE_NAMES
+    from config import FEATURE_NAMES
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--arch', choices=list(CV_CONFIGS.keys()), required=True)
+    parser.add_argument('--arch',         choices=list(CV_CONFIGS.keys()), required=True)
     parser.add_argument('--features_dir', default='features/data')
-    parser.add_argument('--audio_dir',    default='audio')
+    parser.add_argument('--audio_dir',    default=None,
+                        help='Directory with AudioSet .wav files (only needed if pkl files are missing)')
+    parser.add_argument('--annot_csv',    default=None,
+                        help='Path to balanced_train_segments.csv (only needed if pkl files are missing)')
+    parser.add_argument('--labels_csv',   default=None,
+                        help='Path to class_labels_indices.csv (only needed if pkl files are missing)')
     args = parser.parse_args()
 
+    needed_wins = sorted({win for _, _, win, _ in CV_CONFIGS[args.arch]['configs']})
+
+    needed_pkls = [
+        os.path.join(args.features_dir, f'balanced_features_{feat}_wl{w}_hl{w}.pkl')
+        for w in needed_wins for feat in FEATURE_NAMES
+    ]
+    missing = [p for p in needed_pkls if not os.path.exists(p)]
+
+    if missing:
+        if not (args.annot_csv and args.labels_csv):
+            raise SystemExit(
+                f"{len(missing)} feature pkl file(s) missing under '{args.features_dir}'.\n"
+                "Pass --annot_csv, --labels_csv, and --audio_dir to extract them here."
+            )
+        from features.dataset import load_segments
+        segments_df = load_segments(args.annot_csv, args.labels_csv)
+    else:
+        segments_df = None
+
     all_data, y_fixed = load_all_data(
-        args.features_dir, None, args.audio_dir, WINDOW_SIZES, FEATURE_NAMES
+        args.features_dir, segments_df, args.audio_dir, needed_wins, FEATURE_NAMES
     )
     run_cv(args.arch, all_data, y_fixed)

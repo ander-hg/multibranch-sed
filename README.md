@@ -54,10 +54,22 @@ pip install -r requirements.txt
 
 ## Data
 
-Download AudioSet balanced from the official source. Set `audio_base_path` and
-`balanced_path` in your loading script to point to the audio files and the
-`balanced_train_segments.csv` annotation file. Pre-extracted features (`.pkl`)
-are not versioned due to size; run `features/dataset.py` to regenerate them.
+Download AudioSet balanced from the official source. You will need:
+
+- the audio files (`.wav`) in a directory of your choice
+- `balanced_train_segments.csv` — the annotation file
+- `class_labels_indices.csv` — the label index file
+
+Pre-extracted features (`.pkl`) are not versioned due to size. Run `cv.py` with
+the CSV flags to extract them on first run:
+
+```bash
+python -m experiments.cv --arch mamba \
+    --features_dir features/data \
+    --annot_csv path/to/balanced_train_segments.csv \
+    --labels_csv path/to/class_labels_indices.csv \
+    --audio_dir  path/to/audioset/
+```
 
 ## Reproducibility
 
@@ -74,14 +86,19 @@ import tensorflow as tf
 from config import set_seeds, WINDOW_SIZES, FEATURE_NAMES
 set_seeds()
 
-from features.dataset import load_all_data
+from features.dataset import load_all_data, load_segments
 from models.inception import build_inception_multibranch
 from experiments.utils import run_multibranch_experiment
 
+balanced_segments = load_segments(
+    annot_csv="path/to/balanced_train_segments.csv",
+    labels_csv="path/to/class_labels_indices.csv",
+)
+
 all_data, y_fixed = load_all_data(
-    features_dir="features/",
-    segments_df=balanced_segments,         # pandas DataFrame from balanced_train_segments.csv
-    audio_base_path="/path/to/audioset/",
+    features_dir="features/data",
+    segments_df=balanced_segments,
+    audio_base_path="path/to/audioset/",
     window_sizes=WINDOW_SIZES,
     feature_names=FEATURE_NAMES,
 )

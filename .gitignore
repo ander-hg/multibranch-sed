@@ -11,6 +11,13 @@ dist/
 
 # Large binary data — too big for Git
 features/*.pkl
+features/data/
+
+# Paper drafts (keep local, not part of code repo)
+SBBD_2026*.pdf
+SBBD_2026*.zip
+figures/*_old.pdf
+figures/*_small.pdf
 
 # OS
 .DS_Store

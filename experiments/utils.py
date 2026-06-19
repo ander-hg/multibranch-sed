@@ -55,7 +55,7 @@ def evaluate_model(model, X_test, y_test):
 
 
 def run_multibranch_experiment(combos, all_data, win_hop, y_fixed,
-                               build_fn=None, epochs=MAX_EPOCHS,
+                               build_fn, epochs=MAX_EPOCHS,
                                results_path=None, normalize=False,
                                norm_features=None, key_suffix=""):
     if results_path and os.path.exists(results_path):
@@ -105,12 +105,10 @@ def run_multibranch_experiment(combos, all_data, win_hop, y_fixed,
         _run_seed = int(hashlib.md5(result_key.encode()).hexdigest(), 16) % (2**31)
         random.seed(_run_seed); np.random.seed(_run_seed); tf.random.set_seed(_run_seed)
 
-        from models.inception import build_inception_multibranch
-        _build = build_fn if build_fn is not None else build_inception_multibranch
-        model  = _build(input_shapes, y_fixed.shape[1])
+        model = build_fn(input_shapes, y_fixed.shape[1])
 
         callbacks  = [EarlyStopping(monitor="val_loss", patience=ES_PATIENCE, restore_best_weights=True)]
-        fit_kwargs = dict(epochs=epochs, batch_size=BATCH_SIZE, verbose=0,
+        fit_kwargs = dict(epochs=epochs, batch_size=BATCH_SIZE, verbose=1,
                          validation_split=VAL_SPLIT, callbacks=callbacks)
         history      = model.fit(X_train_list, y_train, **fit_kwargs)
         actual_epochs = len(history.history["loss"])

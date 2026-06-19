@@ -35,7 +35,6 @@ PALETTE = {
 }
 
 ALL_W = [128, 256, 512, 1024]
-MS    = {128: '5.8', 256: '11.6', 512: '23.2', 1024: '46.4'}
 
 
 def _load(name):
@@ -51,7 +50,7 @@ def _save(fig, name):
 
 def fig1_frame_length_arch(r_cnn_mb, r_mb, r_tr_mb, r_mamba_mb):
     POS     = {w: i for i, w in enumerate(ALL_W)}
-    POS_LBL = [f"w{w}\n({MS[w]} ms)" for w in ALL_W]
+    POS_LBL = [f"w{w}" for w in ALL_W]
 
     def _pts(rfile):
         xs, ys = [], []
@@ -61,7 +60,7 @@ def fig1_frame_length_arch(r_cnn_mb, r_mb, r_tr_mb, r_mamba_mb):
                 xs.append(POS[w]); ys.append(v)
         return xs, ys
 
-    fig, ax = plt.subplots(figsize=(2.8, 2.2))
+    fig, ax = plt.subplots(figsize=(2.8, 2.0))
     for label, rfile, style in [
         ("CNN",         r_cnn_mb,   "o--"),
         ("Inception",   r_mb,       "s-"),
@@ -103,7 +102,7 @@ def fig2_cv_comparison():
         ax.plot([x0, x0, x1, x1], [y, y+dy, y+dy, y], color='#333333', lw=0.8)
         ax.text((x0+x1)/2, y+dy+0.0008, label, ha='center', va='bottom', fontsize=7.5)
 
-    fig, ax = plt.subplots(figsize=(COL_W, 3.2))
+    fig, ax = plt.subplots(figsize=(COL_W, 2.4))
     bw = 0.32
     x  = np.arange(len(WINDOWS))
 
@@ -128,7 +127,8 @@ def fig2_cv_comparison():
     ax.set_xticklabels([f'w{w}' for w in WINDOWS], fontsize=9)
     ax.set_xlabel('Frame length', fontsize=9)
     ax.set_ylabel('mAP (mean ± std, 5-fold CV)', fontsize=9)
-    ax.legend(fontsize=5, framealpha=0.7)
+    ax.yaxis.set_label_coords(-0.18, 0.5)
+    ax.legend(fontsize=5, framealpha=0.7, loc='lower left')
     ax.yaxis.set_major_formatter(mticker.FormatStrFormatter('%.3f'))
     fig.tight_layout()
     _save(fig, 'fig2_cv_comparison')

@@ -9,7 +9,7 @@ import numpy as np
 
 RANDOM_SEED  = 42
 MAX_EPOCHS   = 200
-WINDOW_SIZES = [128, 256, 512, 1024]  # samples (≈5.8, 11.6, 23.2, 46.4 ms at 22 050 Hz)
+WINDOW_SIZES = [128, 256, 512, 1024]  # ms per frame; at 44 100 Hz: 5644/11289/22579/45158 samples/frame → ~78/39/19/9 frames per 10s clip (no overlap)
 BATCH_SIZE   = 32
 ES_PATIENCE  = 5
 VAL_SPLIT    = 0.1
