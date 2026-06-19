@@ -20,7 +20,7 @@ the classification head) consistently improves all architectures by 17–28% mAP
 | CNN          | 0.097†           | 0.123 ± 0.006          |
 | Inception    | 0.115†           | **0.135 ± 0.004**      |
 | Transformer  | 0.085†           | 0.109 ± 0.005          |
-| Mamba        | 0.086†           | 0.110†                 |
+| Mamba        | 0.086†           | 0.114 ± 0.003          |
 
 †single-run; others are 5-fold CV mean ± std.
 
