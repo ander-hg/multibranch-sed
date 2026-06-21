@@ -1,10 +1,10 @@
-# Multi-Branch Feature Fusion for Weakly Labeled Audio Classification
+# From-Scratch Audio Classification with Multi-Branch Feature Fusion
 
 Code for the experiments reported in:
 
-> Anderson H. Giacomini, Elaine Parros Machado de Sousa.
-> **Multi-Branch Feature Fusion for Weakly Labeled Audio Classification:
-> An Empirical Comparison of CNN, Transformer, and Mamba Architectures.**
+> Anderson H. Giacomini, André M. S. Magalhães, Elaine P. M. Sousa.
+> **From-Scratch Audio Classification with Multi-Branch Feature Fusion:
+> Comparing CNN, Transformer, and Mamba.**
 > SBBD 2026.
 
 ## Overview
@@ -13,7 +13,7 @@ We compare four neural architectures — CNN, Inception-style CNN, Transformer,
 and Mamba — for multi-label audio classification on AudioSet balanced
 (16,306 clips, 527 classes), training entirely from scratch.
 A multi-branch design (one encoder per acoustic feature, merged before
-the classification head) consistently improves all architectures by 17–28% mAP.
+the classification head) consistently improves all architectures by 17–33% mAP.
 
 | Architecture | Single-feat. mAP | Multi-feat. mAP       |
 |---|---|---|
