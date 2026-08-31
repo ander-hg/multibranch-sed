@@ -21,9 +21,6 @@ F_MAX  = 8000
 
 FEATURE_NAMES = ['log_mel', 'mfcc', 'chroma', 'zcr', 'rms', 'statistical', 'spectral_centroid']
 
-# log_mel excluded: already db-normalized per clip
-SELNORM_FEATURES = {'mfcc', 'chroma', 'zcr', 'rms', 'statistical', 'spectral_centroid'}
-
 
 def set_seeds():
     import tensorflow as tf

@@ -104,13 +104,16 @@ all_data, y_fixed = load_all_data(
 )
 
 run_multibranch_experiment(
-    combos=[("all_w128_norm_es", ["log_mel", "mfcc", "chroma",
-                                   "zcr", "rms", "statistical", "spectral_centroid"])],
+    combos=[("all_w128", ["log_mel", "mfcc", "chroma",
+                           "zcr", "rms", "statistical", "spectral_centroid"])],
     all_data=all_data, win_hop=128, y_fixed=y_fixed,
     build_fn=build_inception_multibranch,
     results_path="results/inception_multibranch_es_results.json",
     normalize=True,
+    key_suffix="_es",
 )
+# result_key = f"{combo_name}{'_norm' if normalize else ''}{key_suffix}"
+# -> "all_w128_norm_es", matching the cached key in results/*.json
 ```
 
 ## Regenerating figures

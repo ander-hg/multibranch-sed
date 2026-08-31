@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "multibranch-sed: From-Scratch Audio Classification with Multi-Branch Feature Fusion"
+authors:
+  - family-names: "Giacomini"
+    given-names: "Anderson H."
+    affiliation: "University of São Paulo (USP)"
+  - family-names: "Magalhães"
+    given-names: "Andre M. S."
+    affiliation: "University of São Paulo (USP)"
+  - family-names: "Sousa"
+    given-names: "Elaine P. M."
+    affiliation: "University of São Paulo (USP)"
+repository-code: "https://github.com/ander-hg/multibranch-sed"
+license: MIT
+version: 1.0.0
+date-released: 2026-08-25
+preferred-citation:
+  type: conference-paper
+  title: "From-Scratch Audio Classification with Multi-Branch Feature Fusion: Comparing CNN, Transformer, and Mamba"
+  authors:
+    - family-names: "Giacomini"
+      given-names: "Anderson H."
+    - family-names: "Magalhães"
+      given-names: "Andre M. S."
+    - family-names: "Sousa"
+      given-names: "Elaine P. M."
+  conference:
+    name: "Simpósio Brasileiro de Banco de Dados (SBBD 2026)"
+  year: 2026
